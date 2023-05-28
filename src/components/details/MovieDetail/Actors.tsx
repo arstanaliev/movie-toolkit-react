@@ -10,21 +10,10 @@ import {
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 import {APIKEY} from "../../../APIKEY/APIKEY";
-import Slider from "react-slick"
 import {RiLoader3Fill} from "react-icons/ri";
 
 
 const Actors = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 1000,
-        autoplaySpeed: 5000,
-        cssEase: "linear"
-    };
 
     const {detailId} = useParams()
     const {actors, error, loader} = useAppSelector(state => state.actorSlice)
@@ -67,10 +56,13 @@ const Actors = () => {
         <div id="actor">
             <div className="container">
                 <div className="actor">
-                    <Slider {...settings}>
-                        {
-                            actors.map((el) => (
-                                el.profile_path &&
+                    {
+                        <div style={{
+                            display: "flex"
+                        }}>
+                            {
+                                actors.map((el) => (
+                                    el.profile_path &&
                                     <div key={el.id}>
                                         <Link to={`/actor/${el.id}`}>
                                             <div className="actor-title">
@@ -84,9 +76,11 @@ const Actors = () => {
 
                                     </div>
 
-                            ))
-                        }
-                    </Slider>
+                                ))
+                            }
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>

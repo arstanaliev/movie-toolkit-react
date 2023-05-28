@@ -10,20 +10,9 @@ import {
 } from "../../../store/Reducer/detailRedusers/TrailerSlice";
 import {APIKEY} from "../../../APIKEY/APIKEY";
 import {useParams} from "react-router-dom";
-import Slider from "react-slick";
 import {RiLoader3Fill} from "react-icons/ri";
 
 const Trailer = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 1000,
-        autoplaySpeed: 5000,
-        cssEase: "linear"
-    };
     const {detailId} = useParams()
     const {trailer, loader, error} = useAppSelector(state => state.trailerSlice)
     const dispatch = useAppDispatch()
@@ -64,21 +53,27 @@ const Trailer = () => {
         <div id="trailer">
             <div className="container">
                 <div className="trailer">
-                    <Slider {...settings}>
-                        {
-                            trailer.map((el) => (
-                                el.key &&
-                                <div>
-                                    <div className="trailer-title">
-                                        <iframe width="500" height="300" src={`https://www.youtube.com/embed/${el.key}`}
-                                                title="YouTube video player" frameBorder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                allowFullScreen></iframe>
+                    {
+                        <div style={{
+                            display: "flex"
+                        }}>
+                            {
+                                trailer.map((el) => (
+                                    el.key &&
+                                    <div>
+                                        <div className="trailer-title">
+                                            <iframe width="500" height="300"
+                                                    src={`https://www.youtube.com/embed/${el.key}`}
+                                                    title="YouTube video player" frameBorder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    allowFullScreen></iframe>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
-                        }
-                    </Slider>
+                                ))
+                            }
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>

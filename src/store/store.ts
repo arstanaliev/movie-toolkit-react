@@ -5,6 +5,7 @@ import actorSlice from "./Reducer/detailRedusers/ActorsSlice";
 import trailerSlice from "./Reducer/detailRedusers/TrailerSlice";
 import actorDetailSlice from "./Reducer/detailRedusers/ActorDetailSlice/ActorDetailSlice";
 import actorMovieSlice from "./Reducer/detailRedusers/ActorDetailSlice/ActorMovieSlice";
+import searchSlice from "./Reducer/detailRedusers/Search/SearchSlice";
 
 const rootReducer = combineReducers({
     movieSlice,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     trailerSlice,
     actorDetailSlice,
     actorMovieSlice,
+    searchSlice
 
 })
 export const setupStore = () => {

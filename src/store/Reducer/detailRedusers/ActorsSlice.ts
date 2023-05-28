@@ -6,6 +6,7 @@ interface IActors {
     loader: boolean
     error: string
 }
+
 const initialState: IActors = {
     actors: [],
     loader: false,

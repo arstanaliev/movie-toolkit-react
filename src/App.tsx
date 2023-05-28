@@ -9,6 +9,7 @@ import TopRated from "./components/TopRated";
 import DetailPage from "./components/details/DetailPage";
 import ActorDetail from "./components/details/MovieDetail/ActoDetail/ActorDetail";
 import ActorPage from "./components/details/MovieDetail/ActoDetail/ActorPage";
+import Search from "./components/Search/Search";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path={"/top-rated"} element={<TopRated/>}/>
             <Route path={"/detail/:detailId"} element={<DetailPage/>}/>
             <Route path={"/actor/:detailId"} element={<ActorPage/>}/>
+            <Route path={"/search/:searchId"} element={<Search/>}/>
         </Routes>
     </div>
   );

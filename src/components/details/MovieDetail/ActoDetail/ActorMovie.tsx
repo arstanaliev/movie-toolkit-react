@@ -9,20 +9,9 @@ import {
 } from "../../../../store/Reducer/detailRedusers/ActorDetailSlice/ActorMovieSlice";
 import axios from "axios";
 import {APIKEY} from "../../../../APIKEY/APIKEY";
-import Slider from "react-slick";
 import {RiLoader3Fill} from "react-icons/ri";
 
 const ActorMovie = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 1000,
-        autoplaySpeed: 5000,
-        cssEase: "linear"
-    };
     const {detailId} = useParams()
     const {actorMovie, loader, error} = useAppSelector(state => state.actorMovieSlice)
     const dispatch = useAppDispatch()
@@ -64,48 +53,27 @@ const ActorMovie = () => {
             <div className="container">
                 <div className="actor-movie">
                     {
-                        actorMovie.length > 5 ?
-                            <Slider {...settings}>
-                                {
-                                    actorMovie.map((el) => (
-                                        el.poster_path &&
-                                        <div key={el.id}>
-                                            <Link to={`/detail/${el.id}`}>
-                                                <div className="actor-title">
-                                                    <img width={200}
-                                                         src={`https://www.themoviedb.org/t/p/w138_and_h175_face${el.poster_path}`}
-                                                         alt=""/>
-                                                    <h1>{el.original_title}</h1>
-                                                </div>
-                                            </Link>
+                        <div style={{
+                            display: "flex"
+                        }}>
+                            {
+                                actorMovie.map((el) => (
+                                    el.poster_path &&
+                                    <div key={el.id}>
+                                        <Link to={`/detail/${el.id}`}>
+                                            <div className="actor-title">
+                                                <img width={200}
+                                                     src={`https://www.themoviedb.org/t/p/w138_and_h175_face${el.poster_path}`}
+                                                     alt=""/>
+                                                <h1>{el.original_title}</h1>
+                                            </div>
+                                        </Link>
 
-                                        </div>
+                                    </div>
 
-                                    ))
-                                }
-                            </Slider> :
-                            <div style={{
-                                display: "flex",
-                                justifyContent: "space-evenly"
-                            }}>
-                                {
-                                    actorMovie.map((el) => (
-                                        el.poster_path &&
-                                        <div key={el.id}>
-                                            <Link to={`/detail/${el.id}`}>
-                                                <div className="actor-title">
-                                                    <img width={200}
-                                                         src={`https://www.themoviedb.org/t/p/w138_and_h175_face${el.poster_path}`}
-                                                         alt=""/>
-                                                    <h1>{el.original_title}</h1>
-                                                </div>
-                                            </Link>
-
-                                        </div>
-
-                                    ))
-                                }
-                            </div>
+                                ))
+                            }
+                        </div>
                     }
 
                 </div>

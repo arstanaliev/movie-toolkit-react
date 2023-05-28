@@ -206,7 +206,7 @@ body {
     border: 2px solid black;
     background: #0b0010;
     width: 220px;
-    margin: 0 auto;
+    margin: 0 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -219,6 +219,7 @@ body {
 
 .trailer {
     padding: 50px 0;
+    overflow-x: auto;
 }
 
 #trailer {
@@ -232,7 +233,7 @@ body {
     box-shadow: 0 0 20px 20px rgba(0, 41, 192, 0.49);
     width: 500px;
     height: 300px;
-    margin: 40px auto;
+    margin: 40px 50px;
 }
 
 .trailer button {
@@ -308,6 +309,7 @@ body {
 
 .actor-movie {
     padding: 50px 0;
+    overflow-x: auto;
 }
 
 .actor-movie h1 {
@@ -321,4 +323,25 @@ body {
     text-align: center;
     color: gray;
     font-size: 15px;
+}
+.header input {
+    padding: 3px 30px 3px 8px;
+    border-radius: 20px;
+}
+.header input:hover {
+    transform: scale(1.03);
+}
+.header input:focus {
+    transform: scale(1.03);
+}
+.actor {
+    overflow-x: auto;
+}
+::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background: rgba(16, 13, 13, 0.82);
+    border-radius: 20px;
 }

@@ -45,3 +45,10 @@ export interface IActorMovie {
     vote_average: number
     id: number
 }
+export interface ISearch {
+    release_date: string
+    poster_path: string
+    original_title: string
+    vote_average: number
+    id: number
+}
