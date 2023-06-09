@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {all} from "axios";
+import {Simulate} from "react-dom/test-utils";
+import {useAppSelector} from "../hooks/useAppSelector";
 
 const Header = () => {
     const [value, setValue] = useState("")

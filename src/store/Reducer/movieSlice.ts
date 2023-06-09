@@ -1,18 +1,32 @@
-import {IMovie} from "../../types/movieInterface";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IMovie} from "../../types/movieInterface";
 
-interface IUser {
+interface IMovies {
     movie: IMovie[]
+    actors: IMovie[]
+    actorMovie: IMovie[]
+    search: IMovie[]
+    trailer: IMovie[]
+    detail: Partial<IMovie>
+    actorDetail: Partial<IMovie>
     loader: boolean
     error: string
 }
-const initialState:IUser = {
+
+const initialState: IMovies = {
     movie: [],
+    actors: [],
+    actorMovie: [],
+    search: [],
+    trailer: [],
+    detail: {},
+    actorDetail: {},
     loader: false,
     error: ""
 }
-export const movieSlice = createSlice({
-    name: "user",
+
+export const actorSlice = createSlice({
+    name: "users",
     initialState,
     reducers: {
         fetchingMovie(state) {
@@ -20,16 +34,38 @@ export const movieSlice = createSlice({
         },
         fetchingMovieSuccess(state, action: PayloadAction<IMovie[]>) {
             state.movie = action.payload
+            state.actors = action.payload
+            state.actorMovie = action.payload
+            state.search = action.payload
+            state.loader = false
+            state.error = ""
+        },
+        fetchingTrailerSuccess(state, action: PayloadAction<IMovie[]>) {
+            state.trailer = action.payload
+            state.loader = false
+            state.error = ""
+        },
+        fetchingMovieDetailSuccess(state, action: PayloadAction<IMovie>) {
+            state.detail = action.payload
+            state.loader = false
+            state.error = ""
+        },
+        fetchingActorDetailSuccess(state, action: PayloadAction<IMovie>) {
+            state.actorDetail = action.payload
             state.loader = false
             state.error = ""
         },
         fetchingMovieError(state, action: PayloadAction<string>) {
             state.movie = []
+            state.actors = []
+            state.actorMovie = []
+            state.search = []
+            state.trailer = []
             state.loader = false
             state.error = action.payload
-        }
+        },
     }
 })
 
-export default movieSlice.reducer
-export const {fetchingMovie, fetchingMovieSuccess, fetchingMovieError} = movieSlice.actions
+export default actorSlice.reducer
+export const {fetchingMovie, fetchingMovieSuccess, fetchingMovieError, fetchingTrailerSuccess, fetchingMovieDetailSuccess, fetchingActorDetailSuccess} = actorSlice.actions

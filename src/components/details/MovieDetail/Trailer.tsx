@@ -4,25 +4,25 @@ import {useAppDispatch} from "../../../hooks/useAppDispatch";
 import {AppDispatch} from "../../../store/store";
 import axios from "axios";
 import {
-    fetchingTrailer,
-    fetchingTrailerError,
-    fetchingTrailerSuccess
-} from "../../../store/Reducer/detailRedusers/TrailerSlice";
+    fetchingMovie,
+    fetchingMovieError,
+    fetchingTrailerSuccess,
+} from "../../../store/Reducer/movieSlice";
 import {APIKEY} from "../../../APIKEY/APIKEY";
 import {useParams} from "react-router-dom";
 import {RiLoader3Fill} from "react-icons/ri";
 
 const Trailer = () => {
     const {detailId} = useParams()
-    const {trailer, loader, error} = useAppSelector(state => state.trailerSlice)
+    const {trailer, loader, error} = useAppSelector(state => state.movieSlice)
     const dispatch = useAppDispatch()
     const fetchingTrailers = async (dispatch: AppDispatch) => {
         try {
-            dispatch(fetchingTrailer)
+            dispatch(fetchingMovie)
             const responsive = await axios.get(`https://api.themoviedb.org/3/movie/${detailId}/videos?api_key=${APIKEY}&language=en-US`)
             dispatch(fetchingTrailerSuccess(responsive.data.results))
         } catch (e: any) {
-            dispatch(fetchingTrailerError(e.message))
+            dispatch(fetchingMovieError(e.message))
         }
     }
     useEffect(() => {

@@ -5,29 +5,22 @@ import {useAppDispatch} from "../../../../hooks/useAppDispatch";
 import {AppDispatch} from "../../../../store/store";
 import axios from "axios";
 import {APIKEY} from "../../../../APIKEY/APIKEY";
-import {fetchingActorSuccess} from "../../../../store/Reducer/detailRedusers/ActorsSlice";
-import {
-    fetchingActorDetail,
-    fetchingActorDetailError,
-    fetchingActorDetailSuccess
-} from "../../../../store/Reducer/detailRedusers/ActorDetailSlice/ActorDetailSlice";
-import Actors from "../Actors";
 import {RiLoader3Fill} from "react-icons/ri";
+import {fetchingActorDetailSuccess, fetchingMovie, fetchingMovieError} from "../../../../store/Reducer/movieSlice";
 
 const ActorDetail = () => {
-
     const [accordion, setAccordion] = useState(false)
     const {detailId} = useParams()
-    const {actorDetail, loader, error} = useAppSelector(state => state.actorDetailSlice)
+    const {actorDetail, loader, error} = useAppSelector(state => state.movieSlice)
     const dispatch = useAppDispatch()
 
     const fetchingActorDetails = async (dispatch: AppDispatch) => {
         try {
-            dispatch(fetchingActorDetail())
+            dispatch(fetchingMovie())
             const responsive = await axios.get(`https://api.themoviedb.org/3/person/${detailId}?api_key=${APIKEY}&language=en-US`)
             dispatch(fetchingActorDetailSuccess(responsive.data))
         } catch (e: any) {
-            dispatch(fetchingActorDetailError(e.message))
+            dispatch(fetchingMovieError(e.message))
         }
     }
     useEffect(() => {
@@ -62,11 +55,9 @@ const ActorDetail = () => {
                 <div id="actor-detail">
                     <div className="container">
                         <div className="actor-detail">
-                            <div>
                                 <div className="actor-detail-img">
                                     <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${profile_path}`} alt=""/>
                                 </div>
-                            </div>
                             <div className="actor-detail-title">
                                 <h1>{name}({birthday})</h1>
                                 <h2>Biography: <p>{biography ? biography.length < 201 ? biography :
@@ -89,7 +80,6 @@ const ActorDetail = () => {
                                 </p></h2>
                             </div>
                         </div>
-
                     </div>
                 </div>
             }

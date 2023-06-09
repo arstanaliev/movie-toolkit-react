@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {useAppSelector} from "../hooks/useAppSelector";
 import {RiLoader3Fill} from "react-icons/ri";
@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 
 const Popular = () => {
     const {movie, error, loader} = useAppSelector(state => state.movieSlice)
+    const [bac, setBac] = useState(false)
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(fetchingPopulars)
@@ -32,20 +33,23 @@ const Popular = () => {
                     {
                         movie.map(el => (
                             <div key={el.id} className="movie-titles">
-                                <Link to={`/detail/${el.id}`}>
-                                    <div className="movie-titles-movie">
+                                <div className="movie-titles-movie">
+                                    <Link to={`/detail/${el.id}`}>
+
                                         <div>
-                                            <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${el.poster_path}`}
-                                                 alt=""/>
+                                            <img
+                                                src={`https://www.themoviedb.org/t/p/w220_and_h330_face${el.poster_path}`}
+                                                alt=""/>
                                             <h1>{el.vote_average}</h1>
                                         </div>
                                         <h4>{el.original_title}</h4>
                                         <h5>{el.release_date}</h5>
-                                    </div>
-                                </Link>
+                                    </Link>
+                                </div>
                             </div>
                         ))
                     }
+
                 </div>
             </div>
         </div>

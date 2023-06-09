@@ -11,7 +11,8 @@
 .movie {
     display: flex;
     flex-wrap: wrap;
-    margin: 30px auto;
+    padding: 10% 0 0 0;
+    justify-content: center;
 }
 
 .movie-titles {
@@ -21,7 +22,6 @@
 }
 
 .movie-titles h4 {
-    width: 220px;
     margin: 0 auto;
     color: white;
     font-size: 17px;
@@ -29,31 +29,34 @@
 }
 
 .movie-titles h5 {
-    width: 220px;
     margin: 0 auto;
     color: white;
     font-size: 10px;
 }
 
 #header {
-    background: #0a0010;
+    background: rgba(10, 0, 16, 0.85);
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 0;
+    padding: 2.1% 0;
     width: 90%;
     margin: 0 auto;
 }
 
 .header h1 {
     color: white;
+    font-size: 2vmax;
 }
 
 .header-menu {
-    width: 30%;
+    width: 37%;
     display: flex;
     justify-content: space-between;
 }
@@ -61,6 +64,7 @@
 .header-menu a {
     text-decoration: transparent;
     color: blanchedalmond;
+    font-size: 1vmax;
 }
 
 .header-menu a:hover {
@@ -70,7 +74,6 @@
 .movie-titles-movie {
     padding: 10px;
     width: 220px;
-    height: 400px;
     margin: 0 auto;
     border-radius: 10px;
     border: 2px solid black;
@@ -96,44 +99,51 @@
     border-radius: 10px;
 }
 
-body {
-    background: url("./img/maxresdefault.jpg") no-repeat center/cover fixed;
+#movie-detail {
+    box-shadow: 0 10px 30px 8px black;
+    margin: 0 0 60px 0;
+    border-radius: 0 0 10px 10px;
 }
 
 .movie-detail {
     display: flex;
     color: white;
-    padding: 70px 20px;
+    padding: 15% 2% 7% 2%;
 }
 
 .movie-detail img {
     box-shadow: 0 0 20px 20px rgba(0, 4, 255, 0.22);
+    width: 100%;
+    height: 100%;
 }
 
 .movie-detail-img {
-    padding: 15px;
+    width: 32%;
+    height: 100%;
+    padding: 1.4%;
     border: 2px solid #6e89ad;
     box-shadow: 0 0 20px 20px rgba(0, 41, 192, 0.22);
 }
 
 .movie-detail-title {
-    margin-left: 110px;
+    margin-left: 5%;
 }
 
 .movie-detail-title div p {
     text-shadow: 3px 3px 2px rgb(0, 89, 255);
-    width: 80%;
+    width: 100%;
+    font-size: 1vmax;
 }
 
 .movie-detail-title h4 {
-    margin: 5px 0 25px 0;
+    margin: 1% 0 3% 0;
     display: flex;
     align-items: end;
     text-shadow: 3px 3px 2px rgb(0, 89, 255);;
 }
 
 .movie-detail-title h4 p {
-    font-size: 19px;
+    font-size: 1.3vmax;
 }
 
 .movie-detail-title h4 span {
@@ -141,16 +151,16 @@ body {
 }
 
 .movie-detail-title h3 {
-    font-size: 32px;
+    font-size: 2vmax;
     display: flex;
-    text-shadow: 3px 3px 2px rgb(0, 89, 255);;
+    text-shadow: 3px 3px 2px rgb(0, 89, 255);
 }
 
 .movie-detail-title h2 {
     display: flex;
     align-items: center;
-    font-size: 25px;
-    margin: 0 0 15px 0;
+    font-size: 2vmax;
+    margin: 0 0 1% 0;
     text-shadow: 3px 3px 2px rgb(0, 89, 255);;
 }
 
@@ -159,16 +169,16 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: #0b0010;
-    font-size: 20px;
+    font-size: 1vmax;
     margin-left: 10px;
     box-shadow: 0 0 3px 3px rgba(0, 41, 192, 0.81);
 }
 
 .movie-detail-title h1 {
-    font-size: 30px;
+    font-size: 1vmax;
     text-shadow: 3px 3px 1px rgb(0, 89, 255);
 }
 
@@ -181,23 +191,26 @@ body {
 }
 
 .actor {
-    padding: 50px 0;
+    padding: 10px 0 50px 0;
 }
 
 #actor {
-    background: url("./img/doha-qatar-night-cityscape-city-lights-reflections-dark-5k-5120x2880-1598.jpg") no-repeat center/cover fixed;
+    background: white;
+    box-shadow: 0 40px 30px rgba(0, 0, 0, 0.62);
+    margin: 0 0 80px 0;
+    border-radius: 0 0 10px 10px;
 }
 
 .actor h1 {
     text-align: center;
     color: white;
-    font-size: 22px;
+    font-size: 1vmax;
 }
 
 .actor h2 {
     text-align: center;
     color: gray;
-    font-size: 15px;
+    font-size: 0.7vmax;
 }
 
 .actor-title {
@@ -205,34 +218,60 @@ body {
     border-radius: 10px;
     border: 2px solid black;
     background: #0b0010;
-    width: 220px;
+    width: 92%;
     margin: 0 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.actor-title img {
+    width: 150px;
+}
+
+.actor-movie-title {
+    padding: 10px 0;
+    border-radius: 10px;
+    border: 2px solid black;
+    background: #0b0010;
+    width: 170px;
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.actor-movie-title h5 {
+    width: 200px;
+    text-align: center;
+    color: white;
+    padding: 2px 0 0 0;
+    font-size: 0.7vmax;
+}
+
 .trailer iframe {
     margin: 0 auto;
-    box-shadow: 0 0 20px 20px rgba(0, 4, 255, 0.22);
+    box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.22);
+    height: 260px;
 }
 
 .trailer {
-    padding: 50px 0;
+    padding: 0 0 50px 0;
     overflow-x: auto;
 }
 
 #trailer {
-    background: url("./img/maxresdefault (3).jpg") no-repeat center/cover fixed;
+    background: white;
 }
 
 .trailer-title {
     display: flex;
     padding: 15px;
-    border: 2px solid #6e89ad;
-    box-shadow: 0 0 20px 20px rgba(0, 41, 192, 0.49);
-    width: 500px;
-    height: 300px;
+    border: 2px solid #343434;
+    box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.49);
+    width: 400px;
+    height: 260px;
     margin: 40px 50px;
 }
 
@@ -256,66 +295,74 @@ body {
 
 .actor-detail {
     display: flex;
-    padding: 70px 30px;
+    padding: 15% 3% 7% 3%;
 }
 
 #actor-detail {
-
     background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .7)), url("./img/px1366710-image-kwvxxeqp.jpg") no-repeat center / cover fixed;
+    box-shadow: 0 40px 30px rgba(0, 0, 0, 0.62);
+    margin: 0 0 80px 0;
+    border-radius: 0 0 10px 10px;
 }
 
 .actor-detail-title {
-    padding-left: 80px;
+    width: 80%;
+    padding-left: 4%;
     color: white;
     text-shadow: 3px 3px 2px rgb(0, 89, 255);
 }
 
 .actor-detail-title h1 {
-    font-size: 40px;
+    font-size: 2.6vmax;
 }
 
 .actor-detail-title h2 {
-    font-size: 30px;
+    font-size: 2vmax;
 }
 
 .actor-detail-title h2 p {
-    font-size: 20px;
+    font-size: 1vmax;
 }
 
 .actor-detail-title button {
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 0.8% 1.6%;
     color: white;
     background: #0a0010;
     border: 1px solid gray;
     margin-top: 8px;
     box-shadow: 0 0 5px 5px rgba(0, 38, 173, 0.58);
     text-shadow: 2px 2px 2px rgb(0, 89, 255);
-}
-
-.actor-detail-img img {
-    box-shadow: 0 0 20px 20px rgba(0, 4, 255, 0.22);
+    font-size: 1vmax;
 }
 
 .actor-detail-img {
-    padding: 15px;
+    width: 22%;
+    height: 100%;
+    padding: 1.4%;
     border: 2px solid #6e89ad;
-    box-shadow: 0 0 20px 20px rgba(0, 38, 173, 0.4);
+    box-shadow: 0 0 20px 20px rgba(0, 41, 192, 0.22);
+}
+.actor-detail-img img {
+    box-shadow: 0 0 20px 20px rgba(0, 4, 255, 0.22);
+    width: 100%;
+    height: 100%;
 }
 
 .actor-movie img {
-    margin: 0 auto;
+    width: 150px;
 }
 
 .actor-movie {
-    padding: 50px 0;
-    overflow-x: auto;
+    padding: 0 0 50px 0;
+    overflow-x: scroll;
+    width: 100%;
 }
 
-.actor-movie h1 {
+.actor-movie h4 {
     text-align: center;
     color: white;
-    font-size: 15px;
+    font-size: 1vmax;
     padding-top: 5px;
 }
 
@@ -324,24 +371,121 @@ body {
     color: gray;
     font-size: 15px;
 }
+
 .header input {
-    padding: 3px 30px 3px 8px;
+    padding: 0.6vmax 1vmax 0.6vmax 0.8vmax;
     border-radius: 20px;
+    font-size: 0.7vmax;
 }
+
 .header input:hover {
     transform: scale(1.03);
 }
+
 .header input:focus {
     transform: scale(1.03);
 }
+
 .actor {
     overflow-x: auto;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
-::-webkit-scrollbar-thumb{
+
+::-webkit-scrollbar-thumb {
     background: rgba(16, 13, 13, 0.82);
     border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+    .actor-title img {
+        width: 110px;
+    }
+
+    .actor-title {
+        padding: 7% 0;
+        width: 88%;
+    }
+
+    .movie-titles-movie {
+        width: 200px;
+    }
+
+    .movie-titles-movie img {
+        width: 200px;
+    }
+
+    .movie-titles-movie {
+        width: 200px;
+    }
+
+    .movie-titles-movie img {
+        width: 200px;
+    }
+    .actor-movie-title {
+        width: 130px;
+    }
+    .actor-movie-title img {
+        width: 110px;
+    }
+    #actor-detail {
+        margin: 0 0 45px 0;
+    }
+    .actor-movie {
+        padding: 0 0 10px 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .trailer-title {
+        width: 260px;
+        height: 180px;
+    }
+
+    .trailer-title iframe {
+        width: 260px;
+        height: 180px;
+    }
+
+    .movie-detail-title h2 h5 {
+        width: 30px;
+        height: 30px;
+    }
+
+    .actor-title img {
+        width: 75px;
+    }
+
+    .movie-titles-movie {
+        width: 150px;
+    }
+
+    .movie-titles-movie img {
+        width: 150px;
+    }
+    .actor-movie-title {
+        width: 70px;
+        padding: 5px;
+    }
+    .actor-movie-title img {
+        width: 70px;
+    }
+}
+
+@media (max-width: 425px) {
+    .trailer-title {
+        width: 180px;
+        height: 130px;
+    }
+
+    .trailer-title iframe {
+        width: 180px;
+        height: 130px;
+    }
+    .actor-detail-title h1 {
+        font-size: 2vmax;
+    }
 }

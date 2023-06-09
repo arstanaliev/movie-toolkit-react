@@ -2,27 +2,25 @@ import React, {useEffect} from 'react';
 import {RiLoader3Fill} from "react-icons/ri";
 import {Link, useParams} from "react-router-dom";
 import {AppDispatch} from "../../store/store";
-import {
-    fetchingSearch,
-    fetchingSearchError,
-    fetchingSearchSuccess
-} from "../../store/Reducer/detailRedusers/Search/SearchSlice";
 import axios from "axios";
 import {APIKEY} from "../../APIKEY/APIKEY";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {fetchingMovie, fetchingMovieError, fetchingMovieSuccess} from "../../store/Reducer/movieSlice";
+import {Simulate} from "react-dom/test-utils";
+import click = Simulate.click;
 
 const Search = () => {
     const {searchId} = useParams()
-    const {search, error, loader} = useAppSelector(state => state.searchSlice)
+    const {search, error, loader} = useAppSelector(state => state.movieSlice)
     const dispatch = useAppDispatch()
     const fetchingSearches = async () => {
         try {
-            dispatch(fetchingSearch())
+            dispatch(fetchingMovie())
             const responsive = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${searchId}`)
-            dispatch(fetchingSearchSuccess(responsive.data.results))
+            dispatch(fetchingMovieSuccess(responsive.data.results))
         }catch (e: any) {
-            dispatch(fetchingSearchError(e.message))
+            dispatch(fetchingMovieError(e.message))
         }
     }
     useEffect(() => {
