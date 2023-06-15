@@ -8,14 +8,15 @@ import {APIKEY} from "../../../../APIKEY/APIKEY";
 import {RiLoader3Fill} from "react-icons/ri";
 import {fetchingMovie, fetchingMovieError, fetchingMovieSuccess} from "../../../../store/Reducer/movieSlice";
 
-const ActorMovie = () => {
+// @ts-ignore
+const ActorMovie = ({language}) => {
     const {detailId} = useParams()
     const {actorMovie, loader, error} = useAppSelector(state => state.movieSlice)
     const dispatch = useAppDispatch()
     const fetchingActorMovies = async (dispatch: AppDispatch) => {
         try {
             dispatch(fetchingMovie())
-            const responsive = await axios.get(`https://api.themoviedb.org/3/person/${detailId}/movie_credits?api_key=${APIKEY}&language=en-US`)
+            const responsive = await axios.get(`https://api.themoviedb.org/3/person/${detailId}/movie_credits?api_key=${APIKEY}&language=${language}-US`)
             dispatch(fetchingMovieSuccess(responsive.data.cast))
         } catch (e: any) {
             dispatch(fetchingMovieError(e.message))
@@ -23,7 +24,7 @@ const ActorMovie = () => {
     }
     useEffect(() => {
         dispatch(fetchingActorMovies)
-    }, [])
+    }, [language])
     console.log(actorMovie)
 
     if (loader) {
@@ -57,7 +58,7 @@ const ActorMovie = () => {
                             {
                                 actorMovie.map((el) => (
                                     el.poster_path &&
-                                    <div key={el.id}>
+                                    <div className="actor-movie-movie" key={el.id}>
                                         <Link to={`/detail/${el.id}`}>
                                             <div className="actor-movie-title">
                                                 <div>
@@ -65,7 +66,7 @@ const ActorMovie = () => {
                                                          src={`https://www.themoviedb.org/t/p/w138_and_h175_face${el.poster_path}`}
                                                          alt=""/>
                                                 </div>
-                                                <h4>{el.original_title}</h4>
+                                                <h4>{el.title}</h4>
                                                 <h5>{el.release_date}</h5>
                                             </div>
                                         </Link>

@@ -1,46 +1,39 @@
-import React, {useEffect, useState} from 'react';
-import {useAppDispatch} from "../hooks/useAppDispatch";
-import {useAppSelector} from "../hooks/useAppSelector";
-import {RiLoader3Fill} from "react-icons/ri";
-import {Link} from "react-router-dom";
-import Paginate from "./paginate";
+import React, {useEffect} from 'react';
 import {
-    fetchingCurrentPage,
     fetchingMovie,
     fetchingMovieError,
     fetchingMovieSuccess
-} from "../store/Reducer/movieSlice";
-import {AppDispatch} from "../store/store";
+} from "../../store/Reducer/movieSlice";
 import axios from "axios";
-import {APIKEY} from "../APIKEY/APIKEY";
+import {APIKEY} from "../../APIKEY/APIKEY";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {Link} from "react-router-dom";
+import {RiLoader3Fill} from "react-icons/ri";
 
 // @ts-ignore
-const Popular = ({language}) => {
-    const {movie, error, loader} = useAppSelector(state => state.movieSlice)
-    const [bac, setBac] = useState(false)
+const SearchPage = ({language, filter}) => {
+    const {search, loader, error} = useAppSelector(state => state.movieSlice)
     const dispatch = useAppDispatch()
-    const {currentPage} = useAppSelector(state => state.movieSlice)
-    const fetchingPopulars = async (dispatch: AppDispatch) => {
+    const fetchingSearchPage = async () => {
         try {
             dispatch(fetchingMovie())
-            const responsive = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}&language=${language}-US&page=${currentPage}`)
+            const responsive = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&language=${language}-US&query=${filter}`)
             dispatch(fetchingMovieSuccess(responsive.data.results))
         } catch (e: any) {
             dispatch(fetchingMovieError(e.message))
         }
     }
     useEffect(() => {
-        dispatch(fetchingPopulars)
-    }, [currentPage, language])
-    const onChangeCurrentPage = (number: number) => {
-        dispatch(fetchingCurrentPage(number))
-    }
-    // console.log(movie)
+        dispatch(fetchingSearchPage)
+    }, [filter, language])
     if (loader) {
         return <div>
             <div className="section">
-                <RiLoader3Fill className="loader"/>
-                Loading...
+                <h1>
+                    <RiLoader3Fill className="loader"/>
+                    Loading...
+                </h1>
             </div>
         </div>
     }
@@ -49,15 +42,18 @@ const Popular = ({language}) => {
             Error: {error}
         </div>
     }
+    console.log(search)
+
     return (
-        <div id="movie">
+        <div>
             <div className="container">
                 <div className="movie">
-                    {
-                        movie.map(el => (
+                    { search &&
+                        search.map(el => (
                             <div key={el.id} className="movie-titles">
                                 <div className="movie-titles-movie">
                                     <Link to={`/detail/${el.id}`}>
+
                                         <div>
                                             <img
                                                 src={`https://www.themoviedb.org/t/p/w220_and_h330_face${el.poster_path}`}
@@ -71,13 +67,11 @@ const Popular = ({language}) => {
                             </div>
                         ))
                     }
-                </div>
-                <div className="movie-paginate">
-                    <Paginate onChange={onChangeCurrentPage} currentPage={currentPage}/>
+
                 </div>
             </div>
         </div>
     );
 };
 
-export default Popular;
+export default SearchPage;

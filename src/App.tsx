@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Popular from "./components/Popular";
@@ -7,21 +7,26 @@ import {Route, Routes} from "react-router-dom";
 import NowPlaying from "./components/NowPlaying";
 import TopRated from "./components/TopRated";
 import DetailPage from "./components/details/DetailPage";
-import ActorDetail from "./components/details/MovieDetail/ActoDetail/ActorDetail";
 import ActorPage from "./components/details/MovieDetail/ActoDetail/ActorPage";
+import SearchPage from "./components/Search/SearchPage";
 import Search from "./components/Search/Search";
 
 function App() {
-  return (
-    <div className="App">
-        <Header/>
+    const [dark, setDark] = useState(false)
+    const [language, setLanguage] = useState('')
+    const [filter, setFilter] = useState("")
+    return (
+    <div className="App" style={{
+        background: dark ? "black" : "white"
+    }}>
+        <Header setDark={setDark} dark={dark} setLanguage={setLanguage} language={language} setFilter={setFilter} filter={filter}/>
         <Routes>
-            <Route path={"/"} element={<Popular/>}/>
-            <Route path={"/now-playing"} element={<NowPlaying/>}/>
-            <Route path={"/top-rated"} element={<TopRated/>}/>
-            <Route path={"/detail/:detailId"} element={<DetailPage/>}/>
-            <Route path={"/actor/:detailId"} element={<ActorPage/>}/>
-            <Route path={"/search/:searchId"} element={<Search/>}/>
+            <Route path={"/"} element={<Popular language={language}/>}/>
+            <Route path={"/now-playing"} element={<NowPlaying language={language}/>}/>
+            <Route path={"/top-rated"} element={<TopRated language={language}/>}/>
+            <Route path={"/detail/:detailId"} element={<DetailPage language={language}/>}/>
+            <Route path={"/actor/:detailId"} element={<ActorPage language={language}/>}/>
+            <Route path={"/search/"} element={<SearchPage language={language} filter={filter}/>}/>
         </Routes>
     </div>
   );

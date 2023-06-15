@@ -1,72 +1,59 @@
-import React, {useEffect} from 'react';
-import {RiLoader3Fill} from "react-icons/ri";
-import {Link, useParams} from "react-router-dom";
-import {AppDispatch} from "../../store/store";
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from "axios";
 import {APIKEY} from "../../APIKEY/APIKEY";
-import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {fetchingMovie, fetchingMovieError, fetchingMovieSuccess} from "../../store/Reducer/movieSlice";
-import {Simulate} from "react-dom/test-utils";
-import click = Simulate.click;
+import debounce from "lodash.debounce"
+import {Link} from "react-router-dom";
+import {AiOutlineClose} from "react-icons/ai";
+import {BiSearch} from "react-icons/bi";
 
-const Search = () => {
-    const {searchId} = useParams()
-    const {search, error, loader} = useAppSelector(state => state.movieSlice)
+// @ts-ignore
+const Search = ({language, setFilter, filter}) => {
+    const [searchButton, setSearchButton] = useState(false)
     const dispatch = useAppDispatch()
-    const fetchingSearches = async () => {
-        try {
-            dispatch(fetchingMovie())
-            const responsive = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${searchId}`)
-            dispatch(fetchingMovieSuccess(responsive.data.results))
-        }catch (e: any) {
-            dispatch(fetchingMovieError(e.message))
-        }
-    }
+    const fetchingSearches = useCallback(
+        debounce(async (filter: string) => {
+            try {
+                dispatch(fetchingMovie())
+                const responsive = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${filter}`)
+                dispatch(fetchingMovieSuccess(responsive.data.results))
+            } catch (e: any) {
+                dispatch(fetchingMovieError(e.message))
+            }
+        }, 500),
+        []
+    )
+
     useEffect(() => {
-        dispatch(fetchingSearches)
-    }, [])
+        if (filter) {
+            fetchingSearches(filter);
+        }
+    }, []);
 
-    console.log(search)
+    const handleInputChange = (event: any) => {
+        setFilter(event.target.value.toLowerCase());
+    };
 
-    if (loader) {
-        return <div>
-            <div className="section">
-                <RiLoader3Fill className="loader"/>
-                Loading...
-            </div>
-        </div>
-    }
-    if (error) {
-        return <div>
-            Error: {error}
-        </div>
-    }
+
     return (
-        <div>
-            <div className="container">
-                <div className="movie">
-                    {
-                        search.map(el => (
-                            <div key={el.id} className="movie-titles">
-                                <Link to={`/detail/${el.id}`}>
-                                    <div className="movie-titles-movie">
-                                        <div>
-                                            <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${el.poster_path}`}
-                                                 alt=""/>
-                                            <h1>{el.vote_average}</h1>
-                                        </div>
-                                        <h4>{el.original_title}</h4>
-                                        <h5>{el.release_date}</h5>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
+        <div className="search-movie">
+            <input type="search" id="input-search" placeholder="search movie" value={filter}
+                   onChange={handleInputChange} style={{
+                display: searchButton ? "block" : "none"
+            }}/>
+            <Link to={`/search`} onClick={() => setSearchButton(!searchButton)} style={{
+                display: searchButton ? "none" : "flex"
+            }}>
+                <BiSearch/>
+            </Link>
+            <Link to={`/`} onClick={() => setSearchButton(!searchButton)} style={{
+                display: searchButton ? "flex" : "none"
+            }}>
+                <AiOutlineClose/>
+            </Link>
+
         </div>
     );
 };
-
 export default Search;

@@ -9,6 +9,7 @@ interface IMovies {
     trailer: IMovie[]
     detail: Partial<IMovie>
     actorDetail: Partial<IMovie>
+    currentPage: number
     loader: boolean
     error: string
 }
@@ -21,6 +22,7 @@ const initialState: IMovies = {
     trailer: [],
     detail: {},
     actorDetail: {},
+    currentPage: 1,
     loader: false,
     error: ""
 }
@@ -64,8 +66,19 @@ export const actorSlice = createSlice({
             state.loader = false
             state.error = action.payload
         },
+        fetchingCurrentPage(state, action: PayloadAction<number>) {
+            state.currentPage = action.payload
+        }
     }
 })
 
 export default actorSlice.reducer
-export const {fetchingMovie, fetchingMovieSuccess, fetchingMovieError, fetchingTrailerSuccess, fetchingMovieDetailSuccess, fetchingActorDetailSuccess} = actorSlice.actions
+export const {
+    fetchingMovie,
+    fetchingMovieSuccess,
+    fetchingMovieError,
+    fetchingTrailerSuccess,
+    fetchingMovieDetailSuccess,
+    fetchingActorDetailSuccess,
+    fetchingCurrentPage
+} = actorSlice.actions

@@ -9,7 +9,8 @@ import {AppDispatch} from "../../../store/store";
 import {GoPrimitiveDot} from "react-icons/go";
 import {fetchingMovie, fetchingMovieDetailSuccess, fetchingMovieError} from "../../../store/Reducer/movieSlice";
 
-const MovieDetailPage = () => {
+// @ts-ignore
+const MovieDetailPage = ({language}) => {
     const {detailId} = useParams()
     const {detail, loader, error} = useAppSelector(state => state.movieSlice)
     const dispatch = useAppDispatch()
@@ -17,7 +18,7 @@ const MovieDetailPage = () => {
     const fetchingMovieDetails = async (dispatch: AppDispatch) => {
         try {
             dispatch(fetchingMovie())
-            const responsive = await axios.get(`https://api.themoviedb.org/3/movie/${detailId}?api_key=${APIKEY}&language=en-US`)
+            const responsive = await axios.get(`https://api.themoviedb.org/3/movie/${detailId}?api_key=${APIKEY}&language=${language}-US`)
             dispatch(fetchingMovieDetailSuccess(responsive.data))
         } catch (e: any) {
             dispatch(fetchingMovieError(e.message))
@@ -25,7 +26,7 @@ const MovieDetailPage = () => {
     }
     useEffect(() => {
         dispatch(fetchingMovieDetails)
-    }, [])
+    }, [language])
 
     if (loader) {
         return <div>
@@ -47,7 +48,7 @@ const MovieDetailPage = () => {
             }}>Error: {error}</h1></div>;
     }
     console.log(detail)
-    let {original_title, release_date, id, genres, runtime, vote_average, overview, poster_path, backdrop_path} = detail
+    let {title, release_date, id, genres, runtime, vote_average, overview, poster_path, backdrop_path} = detail
     return (
         <div id="movie-detail" style={{
             background: `linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.7)), url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${backdrop_path}") no-repeat center/cover fixed`,
@@ -58,7 +59,7 @@ const MovieDetailPage = () => {
                         <img height={400} src={`https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`} alt=""/>
                     </div>
                     <div className="movie-detail-title">
-                        <h3>{original_title} <p>({release_date})</p></h3>
+                        <h3>{title} <p>({release_date})</p></h3>
                         <h4>
                             <p>{genres && genres.map(el => "(" + el.name + ")")}</p> <span><GoPrimitiveDot/></span>
                             <p>{runtime && Math.floor(runtime / 60)}h {runtime && runtime % 60}m</p>

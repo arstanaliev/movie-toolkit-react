@@ -12,7 +12,8 @@ import {
     fetchingMovieSuccess
 } from "../../../store/Reducer/movieSlice";
 
-const Actors = () => {
+// @ts-ignore
+const Actors = ({language}) => {
 
     const {detailId} = useParams()
     const {actors, error, loader} = useAppSelector(state => state.movieSlice)
@@ -20,7 +21,7 @@ const Actors = () => {
     const fetchingActors = async (dispatch: AppDispatch) => {
         try {
             dispatch(fetchingMovie())
-            const responsive = await axios.get(`https://api.themoviedb.org/3/movie/${detailId}/credits?api_key=${APIKEY}&language=en-US`)
+            const responsive = await axios.get(`https://api.themoviedb.org/3/movie/${detailId}/credits?api_key=${APIKEY}&language=${language}-US`)
             dispatch(fetchingMovieSuccess(responsive.data.cast))
         } catch (e: any) {
             dispatch(fetchingMovieError(e.message))
@@ -29,7 +30,7 @@ const Actors = () => {
 
     useEffect(() => {
         dispatch(fetchingActors)
-    }, [])
+    }, [language])
     console.log(actors)
 
     if (loader) {
@@ -70,7 +71,7 @@ const Actors = () => {
                                                          src={`https://www.themoviedb.org/t/p/w138_and_h175_face${el.profile_path}`}
                                                          alt=""/>
                                                 </div>
-                                                <h1>{el.original_name}</h1>
+                                                <h1>{el.name}</h1>
                                                 <h2>{el.character}</h2>
                                             </div>
                                         </Link>

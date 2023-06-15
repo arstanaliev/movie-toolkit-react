@@ -2,11 +2,12 @@ import React from 'react';
 import ActorDetail from "./ActorDetail";
 import ActorMovie from "./ActorMovie";
 
-const ActorPage = () => {
+// @ts-ignore
+const ActorPage = ({language}) => {
     return (
         <>
-            <ActorDetail/>
-            <ActorMovie/>
+            <ActorDetail language={language}/>
+            <ActorMovie language={language}/>
         </>
     );
 };

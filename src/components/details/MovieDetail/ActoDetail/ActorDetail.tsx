@@ -8,7 +8,8 @@ import {APIKEY} from "../../../../APIKEY/APIKEY";
 import {RiLoader3Fill} from "react-icons/ri";
 import {fetchingActorDetailSuccess, fetchingMovie, fetchingMovieError} from "../../../../store/Reducer/movieSlice";
 
-const ActorDetail = () => {
+// @ts-ignore
+const ActorDetail = ({language}) => {
     const [accordion, setAccordion] = useState(false)
     const {detailId} = useParams()
     const {actorDetail, loader, error} = useAppSelector(state => state.movieSlice)
@@ -17,7 +18,7 @@ const ActorDetail = () => {
     const fetchingActorDetails = async (dispatch: AppDispatch) => {
         try {
             dispatch(fetchingMovie())
-            const responsive = await axios.get(`https://api.themoviedb.org/3/person/${detailId}?api_key=${APIKEY}&language=en-US`)
+            const responsive = await axios.get(`https://api.themoviedb.org/3/person/${detailId}?api_key=${APIKEY}&language=${language}-US`)
             dispatch(fetchingActorDetailSuccess(responsive.data))
         } catch (e: any) {
             dispatch(fetchingMovieError(e.message))
@@ -25,7 +26,7 @@ const ActorDetail = () => {
     }
     useEffect(() => {
         dispatch(fetchingActorDetails)
-    }, [])
+    }, [language])
     console.log(actorDetail)
 
     if (loader) {

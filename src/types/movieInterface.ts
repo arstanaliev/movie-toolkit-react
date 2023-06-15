@@ -1,9 +1,8 @@
 export interface IMovie {
     profile_path: string
     id: number
-    original_name: string
     character: string
-    original_title: string
+    title: string
     poster_path: string
     release_date: string
     vote_average: number
