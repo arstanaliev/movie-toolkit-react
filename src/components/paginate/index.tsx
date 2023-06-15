@@ -12,7 +12,7 @@ class Paginate extends React.Component<{ onChange: any, currentPage: any }> {
                                previousLabel={<MdKeyboardDoubleArrowLeft/>}
                                onPageChange={event => onChange(event.selected + 1)}
                                pageRangeDisplayed={4}
-                               pageCount={10}
+                               pageCount={25}
                                forcePage={currentPage - 1}
                                renderOnZeroPageCount={null}
                                activeClassName={"active"}

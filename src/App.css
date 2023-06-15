@@ -505,12 +505,13 @@
     padding: 20px 0;
     border-radius: 0 0 10px 0;
     transition: left .4s;
+    height: 100vh;
 }
 
 .burger-menu a {
     text-decoration: transparent;
     color: blanchedalmond;
-    font-size: 1vmax;
+    font-size: 2vmax;
     display: flex;
     align-items: center;
     justify-content: center;
