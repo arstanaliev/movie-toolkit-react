@@ -35,7 +35,7 @@ const Header = ({setDark, dark, setLanguage, language, setFilter, filter}) => {
                         </div>
                     </div>
 
-                    <h1>Welcome</h1>
+                    <Link to={"/"} className="header-logo">Welcome</Link>
                     <div className="header-menu">
                         <Link to={"/"}>Popular</Link>
                         <Link to={"/now-playing"}>Now-Playing</Link>

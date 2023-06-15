@@ -102,8 +102,9 @@
     margin: 0 auto;
 }
 
-.header h1 {
+.header-logo {
     color: white;
+    text-decoration: transparent;
     font-size: 2vmax;
 }
 
@@ -633,7 +634,7 @@
         align-items: center;
     }
 
-    .header h1 {
+    .header-logo {
         display: none;
     }
 }
